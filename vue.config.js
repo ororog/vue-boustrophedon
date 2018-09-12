@@ -1,3 +1,13 @@
 module.exports = {
-  baseUrl: ''
+  baseUrl: '',
+  configureWebpack: {
+    module: {
+      rules: [
+        {
+          test: /\.txt$/,
+          use: 'raw-loader'
+        }
+      ]
+    }
+  }
 }
