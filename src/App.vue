@@ -1,18 +1,21 @@
 <template>
   <v-app>
+    <v-navigation-drawer v-model="drawer" fixed app>
+      <v-btn>
+        吾輩は猫である
+      </v-btn>
+      <v-btn>
+        銀河鉄道の夜
+      </v-btn>
+      <v-btn>
+        Alice in Wonderland
+      </v-btn>
+    </v-navigation-drawer>
+    <v-toolbar color="indigo" dark fixed app>
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <v-toolbar-title>牛耕式ビューワー</v-toolbar-title>
+    </v-toolbar>
     <v-content>
-      <v-container>
-        <h1>牛耕式ビューワー</h1>
-        <v-btn>
-          吾輩は猫である
-        </v-btn>
-        <v-btn>
-          銀河鉄道の夜
-        </v-btn>
-        <v-btn>
-          Alice in Wonderland
-        </v-btn>
-      </v-container>
       <v-container grid-list-md>
         <v-layout row wrap>
           <v-flex d-flex xs12 md6 class="box">
@@ -52,6 +55,7 @@ export default {
   },
   data () {
     return {
+      drawer: null,
       text: Alice
     }
   },
@@ -62,10 +66,8 @@ export default {
       let currentBox = $('<div></div>')
       textBox.append(currentBox)
       for (let i = 0; i < this.text.length; i++) {
-        console.log(this.text[i], this.text.charCodeAt(i))
         let height = currentBox.height()
         if (this.text[i] === '\n') {
-          console.log('enter')
           currentBox.append('<br />')
           currentBox = $('<div></div>')
           textBox.append(currentBox)
