@@ -1,15 +1,30 @@
 <template>
   <v-app>
     <v-navigation-drawer v-model="drawer" fixed app>
-      <v-btn>
-        吾輩は猫である
-      </v-btn>
-      <v-btn>
-        銀河鉄道の夜
-      </v-btn>
-      <v-btn>
-        Alice in Wonderland
-      </v-btn>
+      テキストを読み込む
+      <v-list dense>
+        <v-list-tile-content>
+          <v-btn @click="clickNeko">
+            吾輩は猫である
+          </v-btn>
+        </v-list-tile-content>
+        <v-list-tile-content>
+          <v-btn @click="clickGinga">
+            銀河鉄道の夜
+          </v-btn>
+        </v-list-tile-content>
+        <v-list-tile-content>
+          <v-btn @click="clickAlice">
+            Alice in Wonderland
+          </v-btn>
+        </v-list-tile-content>
+        <v-list-tile-content>
+          <v-btn @click="clickPolitics">
+            アリストテレス 政治学
+          </v-btn>
+        </v-list-tile-content>
+      </v-list>
+      <a href="https://ja.wikipedia.org/wiki/%E7%89%9B%E8%80%95%E5%BC%8F">牛耕式について</a>
     </v-navigation-drawer>
     <v-toolbar color="indigo" dark fixed app>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
@@ -31,7 +46,7 @@
           </v-flex>
           <v-flex d-flex xs12 md6 class="box">
             <v-card class="textBoxWrap">
-              <div class="label">牛耕式</div>
+              <label class="label">牛耕式</label>
               <div ref="textBox" class="textBox"></div>
             </v-card>
           </v-flex>
@@ -44,19 +59,21 @@
 <script>
 import JQuery from 'jquery'
 import Neko from './wagahaiha_neko.txt'
+import Ginga from './ginga_tetsudou.txt'
 import Alice from './alice.txt'
+import Politics from './politics.txt'
 let $ = JQuery
 
 export default {
   name: 'App',
   mounted () {
-    this.boustrophedon()
     window.addEventListener('resize', this.handleResize)
+    this.$nextTick(() => this.boustrophedon())
   },
   data () {
     return {
       drawer: null,
-      text: Alice
+      text: Neko
     }
   },
   methods: {
@@ -83,7 +100,19 @@ export default {
       }
     },
     handleResize () {
-      this.boustrophedon()
+      this.$nextTick(() => this.boustrophedon())
+    },
+    clickNeko () {
+      this.text = Neko
+    },
+    clickGinga () {
+      this.text = Ginga
+    },
+    clickAlice () {
+      this.text = Alice
+    },
+    clickPolitics () {
+      this.text = Politics
     }
   },
   watch: {
@@ -96,6 +125,7 @@ export default {
 
 <style>
 .label {
+    color: rgba(0,0,0,.54);
     font-size: 12px;
 }
 
